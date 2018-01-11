@@ -12,7 +12,7 @@ class App extends Component {
         </div>
         <p className="App-intro">
         </p>
-          <ChatWindow />
+        <ChatWindow />
       </div>
     );
   }
