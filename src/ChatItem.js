@@ -6,7 +6,7 @@ class ChatItem extends Component {
     return (
       <ul>
         {this.props.items.map(item => (
-          <li key={item.id}>{item.text}</li>
+          <li key={item.id}>{item.timestamp}: "{item.text}"</li>
         ))}
       </ul>
     );

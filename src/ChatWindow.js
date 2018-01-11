@@ -29,9 +29,17 @@ class ChatWindow extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    var now = new Date();
+    var hour = now.getHours();
+    var ampm = hour < 12 ? " AM" : " PM";
+    hour %= 12;
+    hour = hour ? hour : 12;
     var newItem = {
       text: this.state.text,
-      id: Date.now()
+      id: now.valueOf(),
+      timestamp: ('0' + hour).slice(-2) + ':' +
+                 ('0' + now.getMinutes()).slice(-2) + ':' +
+                 ('0' + now.getSeconds()).slice(-2) + ampm
     };
     this.setState((prevState) => ({
       items: prevState.items.concat(newItem),
