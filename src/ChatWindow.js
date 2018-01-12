@@ -32,9 +32,7 @@ class ChatWindow extends Component {
     var newItem = {
       text: this.state.text,
       id: Date.now(),
-      timeSinceCreated: 0,
-      timeSinceCreatedText: "0 seconds ago"
-      // timestamp: moment(Date.now()).format('hh:mm:ss A')
+      timestamp: "0 seconds ago"
     };
     this.setState((prevState) => ({
       items: prevState.items.concat(newItem),

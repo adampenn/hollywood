@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class ChatItem extends Component {
 
@@ -9,18 +10,7 @@ class ChatItem extends Component {
 
   setTimeSinceCreated() {
     this.props.items.forEach((item, index) => {
-      var hours,
-          minutes;
-      item.timeSinceCreated += 1;
-      if (item.timeSinceCreated < 60) {
-        item.timeSinceCreatedText = item.timeSinceCreated === 1 ? 1 + " second ago" : item.timeSinceCreated + " seconds ago";
-      } else if (item.timeSinceCreated < 3600) {
-        minutes = Math.floor(item.timeSinceCreated/60)
-        item.timeSinceCreatedText = minutes === 1 ? 1 + " minute ago" : minutes + " minutes ago";
-      } else if (item.timeSinceCreated > 3599) {
-        hours = Math.floor(item.timeSinceCreated/3600)
-        item.timeSinceCreatedText = hours === 1 ? 1 + " hour ago" : hours + " hours ago";
-      }
+      item.timestamp = moment(item.id).fromNow();
       return this.props.items[index] = item;
     })
 
@@ -41,7 +31,7 @@ class ChatItem extends Component {
     return (
       <ul>
         {this.state.items.map(item => (
-          <li key={item.id}>{item.timeSinceCreatedText}: "{item.text}"</li>
+          <li key={item.id}>{item.timestamp}: "{item.text}"</li>
         ))}
       </ul>
     );
