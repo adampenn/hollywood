@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ChatItem from './ChatItem';
-import moment from 'moment'
 
 class ChatWindow extends Component {
 
@@ -33,7 +32,9 @@ class ChatWindow extends Component {
     var newItem = {
       text: this.state.text,
       id: Date.now(),
-      timestamp: moment(Date.now()).format('hh:mm:ss A')
+      timeSinceCreated: 0,
+      timeSinceCreatedText: "0 seconds ago"
+      // timestamp: moment(Date.now()).format('hh:mm:ss A')
     };
     this.setState((prevState) => ({
       items: prevState.items.concat(newItem),
