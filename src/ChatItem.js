@@ -10,7 +10,18 @@ class ChatItem extends Component {
 
   setTimeSinceCreated() {
     this.props.items.forEach((item, index) => {
-      item.timestamp = moment(item.id).fromNow();
+      var hours,
+          minutes,
+          seconds = moment().diff(moment(item.id), "seconds");
+      if (seconds < 60) {
+        item.timestamp = seconds === 1 ? 1 + " second ago" : seconds + " seconds ago";
+      } else if (seconds < 3600) {
+        minutes = Math.floor(seconds/60)
+        item.timestamp = minutes === 1 ? 1 + " minute ago" : minutes + " minutes ago";
+      } else if (seconds > 3599) {
+        hours = Math.floor(seconds/3600)
+        item.timestamp = hours === 1 ? 1 + " hour ago" : hours + " hours ago";
+      }
       return this.props.items[index] = item;
     })
 
