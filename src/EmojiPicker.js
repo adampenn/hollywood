@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import "./EmojiPicker.css";
-import "./emoji.css";
 import $ from 'jquery';
 
 class EmojiPickerInput extends Component {

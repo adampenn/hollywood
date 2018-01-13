@@ -32,7 +32,7 @@ class ChatItem extends Component {
     return (
       <ul>
         {this.state.items.map(item => (
-          <Alert color="dark" key={item.id}><span className="text-left">{item.timestamp}:</span>"{item.text}"</Alert>
+          <Alert color="dark" key={item.id}><span className="text-left">{item.timestamp}:</span> "{item.text}"</Alert>
         ))}
       </ul>
     );
