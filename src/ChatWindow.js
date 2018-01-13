@@ -6,7 +6,7 @@ class ChatWindow extends Component {
 
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.setItems = this.setItems.bind(this);
     this.state = {items: []};
   }
 
@@ -14,27 +14,15 @@ class ChatWindow extends Component {
     return (
       <div>
         <h3>Stukent Chat App</h3>
-        <div> Emojies:
-        </div>
         <ChatItem items={this.state.items}/>
-        <form onSubmit={this.handleSubmit}>
-          <EmojiPickerInput />
-          <button>{'Send'}</button>
-        </form>
+        <EmojiPickerInput setItems={this.setItems} />
       </div>
     );
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    var newItem = {
-      text: this.state.text,
-      id: Date.now(),
-      timestamp: "0 seconds ago"
-    };
+  setItems(newItem) {
     this.setState((prevState) => ({
-      items: prevState.items.concat(newItem),
-      text: ''
+      items: prevState.items.concat(newItem)
     }));
   }
 
