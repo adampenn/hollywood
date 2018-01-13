@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { Alert } from 'reactstrap';
 
 class ChatItem extends Component {
 
@@ -10,18 +11,7 @@ class ChatItem extends Component {
 
   setTimeSinceCreated() {
     this.props.items.forEach((item, index) => {
-      var hours,
-          minutes,
-          seconds = moment().diff(moment(item.id), "seconds");
-      if (seconds < 60) {
-        item.timestamp = seconds === 1 ? 1 + " second ago" : seconds + " seconds ago";
-      } else if (seconds < 3600) {
-        minutes = Math.floor(seconds/60)
-        item.timestamp = minutes === 1 ? 1 + " minute ago" : minutes + " minutes ago";
-      } else if (seconds > 3599) {
-        hours = Math.floor(seconds/3600)
-        item.timestamp = hours === 1 ? 1 + " hour ago" : hours + " hours ago";
-      }
+      item.timestamp = moment(item.id).fromNow();
       return this.props.items[index] = item;
     })
 
@@ -42,7 +32,7 @@ class ChatItem extends Component {
     return (
       <ul>
         {this.state.items.map(item => (
-          <li key={item.id}>{item.timestamp}: "{item.text}"</li>
+          <Alert color="dark" key={item.id}><span className="text-left">{item.timestamp}:</span>"{item.text}"</Alert>
         ))}
       </ul>
     );
