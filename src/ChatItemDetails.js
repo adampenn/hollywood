@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import './ChatItemDetails.css'
 
 class ChatItemDetails extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class ChatItemDetails extends Component {
 
   render() {
     return (
-      <span className="float-right">
+      <Col xs="4" sm="3" md="2">
         <Button color="dark" onClick={this.toggle} className="btn-sm">Message Details</Button>
         <Modal isOpen={this.state.deatilsModalOpen} toggle={this.toggle} className="modal-lg">
           <ModalHeader toggle={this.toggle}>Message Details</ModalHeader>
@@ -60,7 +59,7 @@ class ChatItemDetails extends Component {
             <Button color="primary" onClick={this.toggle}>Close</Button>{' '}
           </ModalFooter>
         </Modal>
-      </span>
+      </Col>
     );
   }
 }

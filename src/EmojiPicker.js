@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import { Button, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
-import "./EmojiPicker.css";
+import { Input, InputGroup, InputGroupAddon, Row, Col, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import $ from 'jquery';
 
 class EmojiPickerInput extends Component {
 
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleMessageChange = this.handleMessageChange.bind(this);
+    this.handleUserChange = this.handleUserChange.bind(this);
     this.appendEmoji = this.appendEmoji.bind(this);
-    this.toggle = this.toggle.bind(this);
+    this.toggleEmojiPicker = this.toggleEmojiPicker.bind(this);
     this.state = {
       text: "",
+      userName: "",
       emojis: ['😀','😁','😂','🤣','😃','😄','😅','😆','😉','😊',
                '😋','😎','😍','😘','😗','😙','😚','🙂','🤩','🤔',
                '🤨','😐','😑','😶','🙄','😏','😣','😥','😮','🤐',
@@ -23,13 +24,13 @@ class EmojiPickerInput extends Component {
                '🤕','🤢','🤮','🤧','😇','🤠','🤡','🤥','🤫','🤭',
                '🧐','😈','👿','💀'
               ],
-      popoverOpen: false
+      emojiPickerOpen: false
     };
   }
 
-  toggle() {
+  toggleEmojiPicker() {
     this.setState({
-      popoverOpen: !this.state.popoverOpen
+      emojiPickerOpen: !this.state.emojiPickerOpen
     });
   }
 
@@ -40,7 +41,11 @@ class EmojiPickerInput extends Component {
     }));
   }
 
-  handleChange(e) {
+  handleUserChange(e) {
+    this.setState ({userName: e.target.value})
+  }
+
+  handleMessageChange(e) {
     this.setState({text: e.target.value});
   }
 
@@ -50,7 +55,7 @@ class EmojiPickerInput extends Component {
       text: this.state.text,
       id: Date.now(),
       timestamp: "0 seconds ago",
-      userName: this.props.data.userName
+      userName: this.state.userName
     };
     this.setState({
       text: ""
@@ -60,15 +65,25 @@ class EmojiPickerInput extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit} className="emojiInputContainer">
-          <div>
-            <input type="text" onChange={this.handleChange} value={this.state.text}  className="h-100 emojiInput"/>
-            <span id="EmojiPickerPopover" onClick={this.toggle} className="emojiButton">&#x1F642;</span>
-          </div>
-          <Button className="ml-2">{'Send'}</Button>
-        </form>
-        <Popover placement="bottom" isOpen={this.state.popoverOpen} target="EmojiPickerPopover" toggle={this.toggle}>
+      <Row>
+        <Col>
+          <InputGroup>
+            <Input type="text" value={this.state.text} onChange={this.handleMessageChange}/>
+            <InputGroupAddon className="p-0">
+              <button className="btn" id="EmojiPickerPopover" onClick={this.toggleEmojiPicker}>&#x1F642;</button>
+            </InputGroupAddon>
+            <InputGroupAddon className="p-0">
+              <button className="btn" onClick={this.handleSubmit}>{'Send'}</button>
+            </InputGroupAddon>
+          </InputGroup>
+          <br/>
+          <InputGroup>
+            <InputGroupAddon className="py-0">User</InputGroupAddon>
+            <Input value={this.state.userName} type="text" placeholder="Current Users Name" onChange={this.handleUserChange}/>
+          </InputGroup>
+          <br/>
+        </Col>
+        <Popover placement="bottom" isOpen={this.state.emojiPickerOpen} target="EmojiPickerPopover" toggle={this.toggleEmojiPicker}>
           <PopoverHeader>Popover Title</PopoverHeader>
           <PopoverBody>
             {this.state.emojis.map(emoji => (
@@ -76,7 +91,7 @@ class EmojiPickerInput extends Component {
             ))}
           </PopoverBody>
         </Popover>
-      </div>
+      </Row>
     );
   }
 

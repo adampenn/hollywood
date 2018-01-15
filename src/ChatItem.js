@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { Alert } from 'reactstrap';
+import { Row, Col, Alert } from 'reactstrap';
 import './ChatItem.css'
 import ChatItemDetails from './ChatItemDetails'
 
@@ -32,14 +32,18 @@ class ChatItem extends Component {
 
   render() {
     return (
-      <div>
+      <Row>
         {this.state.items.map(item => (
-          <Alert color="dark" key={item.id}>
-            <span className="message">{item.text}</span>
-            <ChatItemDetails item={item} />
-          </Alert>
+          <Col>
+            <Alert color="dark" key={item.id}>
+              <Row className="pl-2">
+                <Col className="bg-white message">{item.text}</Col>
+                <ChatItemDetails item={item} />
+              </Row>
+            </Alert>
+          </Col>
         ))}
-      </div>
+      </Row>
     );
   }
 
