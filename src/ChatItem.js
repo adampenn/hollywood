@@ -37,7 +37,7 @@ class ChatItem extends Component {
           <Col>
             <Alert color="dark" key={item.id}>
               <Row className="pl-2">
-                <Col className="bg-white message">{item.text}</Col>
+                <Col className="bg-white rounded message">{item.text}</Col>
                 <ChatItemDetails item={item} />
               </Row>
             </Alert>
