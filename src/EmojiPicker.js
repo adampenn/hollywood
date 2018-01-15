@@ -49,12 +49,13 @@ class EmojiPickerInput extends Component {
     var newItem = {
       text: this.state.text,
       id: Date.now(),
-      timestamp: "0 seconds ago"
+      timestamp: "0 seconds ago",
+      userName: this.props.data.userName
     };
     this.setState({
       text: ""
     });
-    this.props.setItems(newItem);
+    this.props.data.setItems(newItem);
   }
 
   render() {

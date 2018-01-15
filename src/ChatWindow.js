@@ -7,7 +7,9 @@ class ChatWindow extends Component {
   constructor(props) {
     super(props);
     this.setItems = this.setItems.bind(this);
-    this.state = {items: []};
+    this.state = {
+      items: []
+    };
   }
 
   render() {
@@ -15,7 +17,7 @@ class ChatWindow extends Component {
       <div>
         <h3>Stukent Chat App</h3>
         <ChatItem items={this.state.items}/>
-        <EmojiPickerInput setItems={this.setItems} />
+        <EmojiPickerInput data={{setItems: this.setItems, userName: this.props.userName}} />
       </div>
     );
   }
