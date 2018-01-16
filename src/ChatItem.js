@@ -32,18 +32,20 @@ class ChatItem extends Component {
 
   render() {
     return (
-      <Row>
+      <div>
         {this.state.items.map(item => (
-          <Col>
-            <Alert color="dark" key={item.id}>
-              <Row className="pl-2">
-                <Col className="bg-white rounded message">{item.text}</Col>
-                <ChatItemDetails item={item} />
-              </Row>
-            </Alert>
-          </Col>
+          <Row>
+            <Col>
+              <Alert color="dark w-100" key={item.id}>
+                <Row className="pl-2">
+                  <Col className="bg-white rounded message">{item.text}</Col>
+                  <ChatItemDetails item={item} />
+                </Row>
+              </Alert>
+            </Col>
+          </Row>
         ))}
-      </Row>
+      </div>
     );
   }
 
